@@ -1,9 +1,16 @@
 class Library:
     def __init__(self):
         self.inventory = []
+        self.borrowers = {}
     
     def add_book(self, book):
         self.inventory.append(book)
+
+    def add_borrower(self, borrower):
+        self.borrowers[borrower.name] = borrower
+
+    def get_borrower(self, borrower):
+        return self.borrowers.get(borrower.name)
     
     def checkout_book(self, book, borrower):
         if book in self.inventory and book.available:
