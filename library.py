@@ -2,7 +2,7 @@ class Library:
     def __init__(self):
         self.inventory = []
     
-    def add_books(self, book):
+    def add_book(self, book):
         self.inventory.append(book)
     
     def checkout_book(self, book, borrower):

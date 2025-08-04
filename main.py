@@ -1,53 +1,44 @@
-import book
-import library
-import borrower
+from library import Library
+from borrower import Borrower
+from book import Book
 
 # Create Books
-book1 = book.Book("The Great Gatsby", "F. Scott Fitzgerald")
-book2 = book.Book("1984", "George Orwell")
-book3 = book.Book("Brave New World", "Aldous Huxley")
-book4 = book.Book("Pride and Prejudice", "Jane Austen")
+book1 = Book("The Great Gatsby", "F. Scott Fitzgerald")
+book2 = Book("1984", "George Orwell")
+book3 = Book("Brave New World", "Aldous Huxley")
+book4 = Book("Pride and Prejudice", "Jane Austen")
 
 # Add books to Library
-lib = library.Library()
+lib = Library()
 lib.add_book(book1)
 lib.add_book(book2)
 lib.add_book(book3)
 lib.add_book(book4)
 
-print("Initial books in the library:")
-for b in lib.inventory:
-    print("- " + b.title)
+def main():
+    while True:
+        print("Choose an option:")
+        print("1. Add a new book to inventory")
+        print("2. Checkout a book for a borrower")
+        print("3. Return a book for a borrower")
+        print("4. List the available books")
+        print("Type 'exit' to exit the application")
 
-# Create Borrowers
-john = borrower.Borrower("John Doe")
-jane = borrower.Borrower("Jane Smith")
+        choice = input("Enter the number of your choice: ")
+        print("\n")
 
-print("\nJohn tries to borrow 'The Great Gatsby'...")
-lib.checkout_book(book1, john)
+        if choice == '1':
+            continue
+        elif choice == '2':
+            continue
+        elif choice == '3':
+            continue
+        elif choice == '4':
+            print(lib.list_inventory())
+        elif choice == 'exit':
+            break
+        else:
+            print(f"{choice} is not a valid option")
 
-print("\nJane tries to borrow 'The Great Gatsby'...")  # This should fail since John already borrowed it
-lib.checkout_book(book1, jane)
-
-print("\nBooks John has borrowed:")
-for b in john.borrowed_books:
-    print("- " + b.title)
-
-print("\nAvailable books in the library:")
-print(lib.list_available_books())
-
-print("\nJane tries to return 'The Great Gatsby'...")  # This should fail since Jane never borrowed it
-lib.return_book(book1, jane)
-
-print("\nJohn returns 'The Great Gatsby'...")
-lib.return_book(book1, john)
-
-print("\nJane tries again to borrow 'The Great Gatsby'...")  # This should succeed now
-lib.checkout_book(book1, jane)
-
-print("\nBooks Jane has borrowed:")
-for b in jane.borrowed_books:
-    print("- " + b.title)
-
-print("\nCurrent available books in the library:")
-print(lib.list_available_books())
+if __name__ == "__main__":
+    main()
