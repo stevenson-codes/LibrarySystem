@@ -2,20 +2,32 @@ from library import Library
 from borrower import Borrower
 from book import Book
 
-# Create Books
-book1 = Book("The Great Gatsby", "F. Scott Fitzgerald")
-book2 = Book("1984", "George Orwell")
-book3 = Book("Brave New World", "Aldous Huxley")
-book4 = Book("Pride and Prejudice", "Jane Austen")
+import pickle
 
-# Add books to Library
 lib = Library()
-lib.add_book(book1)
-lib.add_book(book2)
-lib.add_book(book3)
-lib.add_book(book4)
+FILENAME = 'library.pkl'
+
+# Persistent Storage using Pickle
+def load_library():
+    try:
+        with open(FILENAME, 'rb') as file:
+            unpickler = pickle.Unpickler(file)
+            return unpickler.load()
+    except FileNotFoundError:
+        return Library()
+
+def save_library():
+    try:
+        with open(FILENAME, 'wb') as file:
+            pickler = pickle.Pickler(file)
+            pickler.dump(lib)
+    except pickle.PicklingError:
+        print("Couldn't save library data")
 
 def main():
+    global lib
+    lib = load_library()
+
     while True:
         print("Choose an option:")
         print("1. Add a new book")
@@ -47,6 +59,7 @@ def main():
         elif choice == '5':
             print(lib.list_inventory())
         elif choice == 'exit':
+            save_library()
             break
         else:
             print(f"{choice} is not a valid option")
