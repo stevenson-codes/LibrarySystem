@@ -1,5 +1,6 @@
 class Library:
     def __init__(self):
+        # Probably change inventory into a dict to make lookups easier
         self.inventory = []
         self.borrowers = {}
     
