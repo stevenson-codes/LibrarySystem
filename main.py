@@ -35,10 +35,10 @@ def main():
         print("3. Checkout a book for a borrower")
         print("4. Return a book for a borrower")
         print("5. List the available books")
+        print("6. List the borrowers")
         print("Type 'exit' to exit the application\n")
 
         choice = input("Enter the number of your choice: ")
-        print("\n")
 
         if choice == '1':
             title = input("Enter the title of the book: ")
@@ -46,18 +46,21 @@ def main():
             book = Book(title, author)
             lib.add_book(book)
         elif choice == '2':
-            name = input("Enter the name of the borrower")
+            name = input("Enter the name of the borrower: ")
             borrower = Borrower(name)
             lib.add_borrower(borrower)
         elif choice == '3':
-            # Find the Book in the Inventory with a matching name
-            # Find the Borrower with a matching name
-            # Try to Checkout the book
-            continue
+            title = input("Enter the title of the book to checkout: ")
+            book = lib.find_book(title)
+            name = input("Enter the name of the borrower: ")
+            borrower = lib.find_borrower(name)
+            lib.checkout_book(book, borrower)
         elif choice == '4':
             continue
         elif choice == '5':
             print(lib.list_inventory())
+        elif choice == '6':
+            print(lib.list_borrowers())
         elif choice == 'exit':
             save_library()
             break

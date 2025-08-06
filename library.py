@@ -9,8 +9,14 @@ class Library:
     def add_borrower(self, borrower):
         self.borrowers[borrower.name] = borrower
 
-    def get_borrower(self, borrower):
-        return self.borrowers.get(borrower.name)
+    def find_borrower(self, name):
+        return self.borrowers.get(name)
+    
+    def find_book(self, title):
+        for book in self.inventory:
+            if book.title == title:
+                return book
+        return None
     
     def checkout_book(self, book, borrower):
         if book in self.inventory and book.available:
@@ -28,3 +34,6 @@ class Library:
 
     def list_inventory(self):
         return [book.title for book in self.inventory if book.available]
+    
+    def list_borrowers(self):
+        return list(self.borrowers.keys())
